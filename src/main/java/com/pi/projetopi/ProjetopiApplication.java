@@ -1,6 +1,5 @@
 package com.pi.projetopi;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.springframework.boot.SpringApplication;
@@ -21,5 +20,7 @@ public class ProjetopiApplication {
 		 */
 		SpringApplication.run(ProjetopiApplication.class, args);
 	}
+
+	
 
 }

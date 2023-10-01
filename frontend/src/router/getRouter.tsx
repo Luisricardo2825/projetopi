@@ -1,4 +1,4 @@
-import { createMemoryRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, RouteObject } from "react-router-dom";
 
 export async function getRouter() {
   const routes = await (await import("./getRoutes")).default();
@@ -10,7 +10,7 @@ export async function getRouter() {
       lazy: rest.lazy,
     })) as RouteObject[];
 
-    const router = createMemoryRouter(_routes);
+    const router = createBrowserRouter(_routes);
     return router;
   }
   return null;

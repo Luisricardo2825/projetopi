@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pi.projetopi.model.ErrorRes;
 import com.pi.projetopi.model.Product;
 import com.pi.projetopi.model.RepoProduct;
 
@@ -41,7 +42,8 @@ public class Carros {
 	public ResponseEntity<String> getOne(@PathVariable Long id) throws JsonProcessingException {
 		Optional<Product> prod = repository.findById(id);
 		if (!prod.isPresent())
-			return new ResponseEntity<String>("{\"message\":\"Carro não encontrado\"}", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>(mapper.writeValueAsString(new Error("Carro não encontrado")),
+					HttpStatus.NOT_FOUND);
 		String jsonString = mapper.writeValueAsString(prod.get());
 
 		return new ResponseEntity<String>(jsonString, HttpStatus.OK);
@@ -68,7 +70,7 @@ public class Carros {
 		}
 		if (!exist)
 			return new ResponseEntity<String>("{\"message\":\"Carro não encontrado\"}", HttpStatus.NOT_FOUND);
-		
+
 		String jsonString = mapper.writeValueAsString(prod);
 		return new ResponseEntity<String>(jsonString, HttpStatus.CREATED);
 	}
